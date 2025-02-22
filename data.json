@@ -1,0 +1,31 @@
+{
+    "Vendedores": [
+      {
+        "id": 1,
+        "nombre": "Juan Pérez",
+        "correo": "juanperez@example.com",
+        "fecha_registro": "2025-02-21T10:00:00"
+      },
+      {
+        "id": 2,
+        "nombre": "Ana Gómez",
+        "correo": "anagomez@example.com",
+        "fecha_registro": "2025-02-20T15:30:00"
+      }
+    ],
+    "productos": [
+      {
+        "id": 1,
+        "nombre_producto": "Laptop",
+        "precio": 799.99,
+        "cantidad": 50
+      },
+      {
+        "id": 2,
+        "nombre_producto": "Smartphone",
+        "precio": 299.99,
+        "cantidad": 200
+      }
+    ]
+  }
+  
