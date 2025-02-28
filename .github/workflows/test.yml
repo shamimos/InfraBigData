@@ -27,7 +27,7 @@ jobs:
       - name: paso4 - instalar dependencias
         run: pip install -e .
       - name: paso5 - Realizar la ingesta de datos
-        run: python src/bigdata/Ingesta.py
+        run: python src/Ingesta.py
       - name: paso6 - Ejecutar script
         run: python script.py
 

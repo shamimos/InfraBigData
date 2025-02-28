@@ -25,9 +25,11 @@ def main():
 
     # Guardar el DataFrame combinado en un archivo Excel
     if not all_data.empty:
-        with pd.ExcelWriter('nobel_laureates.xlsx', engine='openpyxl') as writer:
+        # Establecer la ruta completa para guardar el archivo Excel
+        excel_path = 'src/static/xlsx/nobel_laureates.xlsx'
+        with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
             all_data.to_excel(writer, sheet_name='All Data', index=False)
-        print("Archivo Excel 'nobel_laureates.xlsx' generado exitosamente en una sola hoja.")
+        print(f"Archivo Excel 'nobel_laureates.xlsx' generado exitosamente.")
     else:
         print("No se generó el archivo Excel porque no se encontraron datos adecuados.")
 
