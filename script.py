@@ -1,7 +1,16 @@
 import pandas as pd
 import json
+import os
 
 def main():
+    excel_dir = 'src/static/xlsx'
+    excel_path = f"{excel_dir}/reporte.xlsx"
+    
+    if not os.path.exists(excel_dir):
+     os.makedirs(excel_dir)
+
+
+
     # Leer el archivo JSON
     with open('nobel_laureates.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -26,7 +35,6 @@ def main():
     # Guardar el DataFrame combinado en un archivo Excel
     if not all_data.empty:
         # Establecer la ruta completa para guardar el archivo Excel
-        excel_path = 'src/static/xlsx/nobel_laureates.xlsx'
         with pd.ExcelWriter(excel_path, engine='openpyxl') as writer:
             all_data.to_excel(writer, sheet_name='All Data', index=False)
         print(f"Archivo Excel 'nobel_laureates.xlsx' generado exitosamente.")
