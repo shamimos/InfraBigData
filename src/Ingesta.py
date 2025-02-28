@@ -87,6 +87,13 @@ class Ingesta:
         print('Datos insertados correctamente.')
 
     def perform_audit(self):
+        audit_dir = 'src/static/auditoria'
+        audit_file = f"{audit_dir}/auditoria.txt"
+
+        # Crear el directorio si no existe
+        if not os.path.exists(audit_dir):
+           os.makedirs(audit_dir)
+
         df_db = pd.read_sql_query("SELECT * FROM laureates", self.conn)
     
         # Cargar datos desde el archivo JSON
@@ -106,7 +113,7 @@ class Ingesta:
         extra_in_db = db_ids - json_ids
     
         # Crear un informe de auditoría
-        with open('src/static/auditoria/auditoria.txt', 'w') as file:
+        with open(audit_file, 'w') as file:
             file.write('Reporte de Auditoría\n')
             file.write(f'Total registros en DB: {len(df_db)}\n')
             file.write(f'Total registros en JSON: {len(df_json)}\n')
