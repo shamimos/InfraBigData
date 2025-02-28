@@ -2,12 +2,19 @@ import requests
 import json
 import sqlite3
 import pandas as pd
-
+import os
 
 class Ingesta:
     def __init__(self):
         self.api_url = "https://api.nobelprize.org/2.1/laureates"
-        database_path = 'src/static/db/nobel_laureates.db'
+        database_dir = 'src/static/db'
+        database_path = f"{database_dir}/nobel_laureates.db"
+
+        # Crear el directorio si no existe
+        if not os.path.exists(database_dir):
+            os.makedirs(database_dir)
+
+        # Conectar a la base de datos
         self.conn = sqlite3.connect(database_path)
         self.cursor = self.conn.cursor()
         self.setup_tables()
