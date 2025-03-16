@@ -49,7 +49,6 @@ Adicional genera los siguientes archivos:
 
 para ejecutar este archivo se necesita el comando:
 
-````
+```
 python src/cleaning.py
 ```
-````
