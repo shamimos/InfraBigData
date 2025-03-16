@@ -1,5 +1,0 @@
-Reporte de Auditoría
-Total registros en DB: 25
-Total registros en JSON: 25
-Registros en JSON no en DB: {259, 779, 403, 541, 164, 292, 819, 185, 199, 843, 978, 981, 982, 853, 729, 730, 866, 102, 745, 1004, 114, 1012, 628, 376}
-Registros en DB no en JSON: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}
