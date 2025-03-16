@@ -20,29 +20,33 @@ class Ingesta:
         self.setup_tables()
 
     def setup_tables(self):
-        self.cursor.execute('''
-        CREATE TABLE IF NOT EXISTS laureates (
-            id INTEGER PRIMARY KEY,
-            fullName TEXT, 
-            gender TEXT,
-            birthdate TEXT,
-            birthplace TEXT,
-            deathdate TEXT,
-            deathplace TEXT,
-            nobelPrizes TEXT)       
-        ''')
-        self.cursor.execute('''
-        CREATE TABLE IF NOT EXISTS nobel_prizes (
-            prize_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            laureate_id INTEGER,
-            awardYear INTEGER,
-            category TEXT,
-            motivation TEXT,
-            prizeAmount INTEGER,
-            prizeAmountAdjusted INTEGER,
-            FOREIGN KEY (laureate_id) REFERENCES laureates (id))
-        ''')
-        self.conn.commit()
+        try:
+            self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS laureates (
+                id INTEGER PRIMARY KEY,
+                fullName TEXT, 
+                gender TEXT,
+                birthdate TEXT,
+                birthplace TEXT,
+                deathdate TEXT,
+                deathplace TEXT)       
+            ''')
+            self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS nobel_prizes (
+                prize_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                laureate_id INTEGER,
+                awardYear INTEGER,
+                category TEXT,
+                motivation TEXT,
+                prizeAmount INTEGER,
+                prizeAmountAdjusted INTEGER,
+                FOREIGN KEY (laureate_id) REFERENCES laureates (id))
+            ''')
+            self.conn.commit()
+            print("Tables created successfully.")
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+
 
     def get_data(self):
         response = requests.get(self.api_url)
@@ -62,16 +66,18 @@ class Ingesta:
 
     def insert_data(self, data):
         for laureate in data.get('laureates', []):
+            laureate_id = laureate['id']
             fullName = laureate['fullName']['en']
-            gender = laureate.get('gender', 'Unknown')
-            birthdate = laureate.get('birth', {}).get('date', 'Unknown')
-            birthplace = laureate.get('birth', {}).get('place', {}).get('city', {}).get('en', 'Unknown')
+            gender = laureate.get('gender')
+            birthdate = laureate.get('birth', {}).get('date')
+            birthplace = laureate.get('birth', {}).get('place', {}).get('city', {}).get('en')
+            deathdate = laureate.get('death', {}).get('date')
+            deathplace = laureate.get('death', {}).get('place', {}).get('city', {}).get('en')
 
             self.cursor.execute('''
-                INSERT INTO laureates (fullName, gender, birthdate, birthplace)
-                VALUES (?, ?, ?, ?)
-                ''', (fullName, gender, birthdate, birthplace))
-            laureate_id = self.cursor.lastrowid
+                INSERT INTO laureates (id, fullName, gender, birthdate, birthplace, deathdate, deathplace)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ''', (laureate_id, fullName, gender, birthdate, birthplace, deathdate, deathplace))
 
             for prize in laureate.get('nobelPrizes', []):
                 awardYear = prize.get('awardYear')
