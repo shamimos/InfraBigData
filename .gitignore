@@ -32,6 +32,11 @@ MANIFEST
 *.manifest
 *.spec
 
+#
+.src/auditoria/*
+.src/db/*
+.src/xlsx/*
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
