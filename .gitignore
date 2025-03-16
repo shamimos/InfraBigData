@@ -32,10 +32,11 @@ MANIFEST
 *.manifest
 *.spec
 
-#
-.src/auditoria/*
-.src/db/*
-.src/xlsx/*
+#Ignorar archivos csv, db, txt, configuración
+src/auditoria/*
+src/db/*
+src/xlsx/*
+bigdata
 
 # Installer logs
 pip-log.txt
