@@ -1,5 +1,0 @@
-Reporte de Auditoría
-Total registros en DB: 25
-Total registros en JSON: 25
-Registros en JSON no en DB: set()
-Registros en DB no en JSON: set()
