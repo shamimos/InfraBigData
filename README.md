@@ -52,3 +52,13 @@ para ejecutar este archivo se necesita el comando:
 ```
 python src/cleaning.py
 ```
+
+# Enriquecimiento de Datos
+
+El archivo `enriched_data.py`, carga los archivos .csv generados en la limpieza de datos, realiza un merge para realizar el enriquecimiento de la tabla laureates a traves de la llave foranea.
+
+para ejecutar este archivo se utiliza el comando
+
+```
+python src/enriched_data.py
+```
