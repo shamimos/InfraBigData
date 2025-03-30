@@ -18,6 +18,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.9.2"
+      - name: paso0 - eliminar archivos csv generados
+        run: rm -Force -Recurse -Path src/static/xlsx/*
+      - name: paso0 - eliminar archivos db generados
+        run: rm -Force -Recurse -Path src/static/db/*
+      - name: paso0 - eliminar archivos auditoria generados
+        run: rm -Force -Recurse -Path src/static/auditoria/*
       - name: paso1 - crea entorno virtual
         run: python -m venv venv
       - name: paso2 - activar entorno virtual
@@ -32,6 +38,8 @@ jobs:
         run: python script.py
       - name: paso7 -Limpieza de datos
         run: python src/cleaning.py
+      - name: paso8 - Enriquecimiento de datos
+        run: python src/enriched_data.py
 
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
