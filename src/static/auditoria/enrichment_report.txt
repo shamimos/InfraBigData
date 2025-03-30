@@ -1,0 +1,5 @@
+Total registros en nobel_prizes: 11
+Total registros en laureates: 25
+Total registros coincidentes: 11
+Total registros diferentes: 14
+Auditoría completada.
